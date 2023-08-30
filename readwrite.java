@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 // Reads a file
-public class readWrite {
-    public readWrite(String inputFile) throws IOException {
+public class readwrite {
+    public readwrite(String inputFile) throws IOException {
         File file = new File(inputFile);
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
@@ -25,21 +25,36 @@ public class readWrite {
         }
     }
 
+    public static String readFile(File file) {
+        String currentString = "";
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while (reader.ready()) {
+                char nextChar = (char) reader.read();
+                currentString += nextChar;
+
+            }
+            reader.close();
+        } catch (IOException ex) {
+            System.out.println("nah");
+        }
+        return currentString;
+
+    }
+
+    public static int countCharacters(String inputFile) {
+        File newf = new File(inputFile);
+        String blonk = readFile(newf);
+        return blonk.length();
+    }
+
     public static void main(String[] args) {
         try {
-            readWrite rw = new readWrite("input.txt");
+            readwrite rw = new readwrite("input.txt");
             rw.writeCode("output.txt", "aidan rahill is my baby boy i love him");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }}
-
-    
-
-    
-
-    
-
-
-
-
+    }
+}
